@@ -5,6 +5,7 @@ export default function Home() {
   const liDotStyle: string = `mr-4 w-2 h-2 border-white border-2 rounded-full`
   const liElementStyle: string = `mb-12 flex justify-center items-center `
   const settingDotsStyle: string = `opacity-70 mr-1 w-1.5 h-1.5 rounded-full bg-white`
+  const inputStyling: string = `w-72 text-white p-2 bg-transparent border-2 rounded-md`
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function Home() {
           </div>
         </div> */}
 
-        <div className="mt-6 text-white flex-col flex justify-center items-center w-screen">
+        <div className="text-white flex-col flex justify-center items-center w-screen">
           <div className="drop-shadow-lg mb-8 flex flex-col justify-center items-center">
             <h1 className="mb-1 tracking-wider text-3xl">
               Goals
@@ -43,12 +44,25 @@ export default function Home() {
               </div>
             </ul>
           </div>
+          <button className="hover:opacity-70 my-4 text-2xl border-2 py-1 px-3.5 rounded-full">+</button>
+          <form action="" className="w-screen flex justify-center items-center">
+            <input type="text" name="input1" id="input1" className={inputStyling}/>
+            <button type="submit"
+            className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md mx-2"
+            >Submit</button>
+          </form>
         </div>
 
         <div className="flex absolute bottom-6 left-4">
-          <div className={settingDotsStyle}></div>
-          <div className={settingDotsStyle}></div>
-          <div className={settingDotsStyle}></div>
+          <div className="hover:cursor-pointer hover:opacity-70 mr-4 flex justify-center items-center">
+            <div className={settingDotsStyle}></div>
+            <div className={settingDotsStyle}></div>
+            <div className={settingDotsStyle}></div>
+          </div>
+
+          <div>
+            <button className="hover:opacity-70 text-white opacity-90">Edit</button>
+          </div>
         </div> 
       </main>
     </>
