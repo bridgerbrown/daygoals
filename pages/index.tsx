@@ -1,9 +1,7 @@
+import ListItem from "@/components/list-item"
 import Head from "next/head"
 
 export default function Home() {
-  const liStyle: string = `drop-shadow-lg tracking-wider text-center mr-4`
-  const liDotStyle: string = `mr-4 w-2 h-2 border-white border-2 rounded-full`
-  const liElementStyle: string = `mb-12 flex justify-center items-center `
   const settingDotsStyle: string = `opacity-70 mr-1 w-1.5 h-1.5 rounded-full bg-white`
   const inputStyling: string = `w-72 text-white p-2 bg-transparent border-2 rounded-md`
 
@@ -30,18 +28,9 @@ export default function Home() {
           </div>
           <div className="">
             <ul className="text-2xl flex-col">
-              <div className={liElementStyle}>
-                <div className={liDotStyle}></div>
-                <li className={liStyle}>Make more babies</li>
-              </div>
-              <div className={liElementStyle}>
-                <div className={liDotStyle}></div>
-                <li className={liStyle}>Slay a foul beast</li>
-              </div>
-              <div className={liElementStyle}>
-                <div className={liDotStyle}></div>
-                <li className={liStyle}>Explode</li>
-              </div>
+              <ListItem />
+              <ListItem />
+              <ListItem />
             </ul>
           </div>
           <button className="hover:opacity-70 my-4 text-2xl border-2 py-1 px-3.5 rounded-full">+</button>

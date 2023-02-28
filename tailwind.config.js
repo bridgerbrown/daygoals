@@ -5,7 +5,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      margin: {
+          '5.25': '1.4rem',
+      }
+    },
     fontFamily: {
       Gelica: ['gelica', 'sans-serif'],
     },
