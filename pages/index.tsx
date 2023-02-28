@@ -2,24 +2,30 @@ import ListItem from "@/components/list-item"
 import Head from "next/head"
 import { useEffect, useState, MouseEvent } from "react"
 
+interface FormElements extends HTMLFormControlsCollection {
+  textInput: HTMLInputElement
+}
+
+interface InputFormElement extends HTMLFormElement {
+  readonly elements: FormElements
+}
+
 export default function Home() {
   const settingDotsStyle: string = `opacity-70 mr-1 w-1.5 h-1.5 rounded-full bg-white`
   const inputStyling: string = `w-72 text-white p-2 bg-transparent border-2 rounded-md`
-  const [items, setItems] = useState<any>([{id: 0, text: "ya"}])
+  const [items, setItems] = useState<any>([])
 
-  useEffect(() => {}, [items])
-
-  const addItem = (e: MouseEvent<HTMLButtonElement>) => {
+  function handleSubmit(e: React.FormEvent<InputFormElement>){
     e.preventDefault()
-    const text = (document.getElementById("input1") as HTMLInputElement).value
-    console.log(text)
+    const text = (document.getElementById("textInput") as HTMLInputElement).value
     setItems([...items, {id: items.length, text: text}])
-    console.log(items)
   }
 
-  const deleteItem = (id: number) => {
-    setItems(items.map((item: any) => item.id !== id))
-  }
+  // const deleteItem = (id: number) => {
+  //   setItems(items.map((item: any) => item.id !== id))
+  // }
+
+
 
   return (
     <>
@@ -43,11 +49,12 @@ export default function Home() {
             <div className="w-20 rounded-full h-1 bg-white opacity-90"></div>
           </div>
           <div className="">
-              {items.map((item: any) => <ListItem deleteItem={deleteItem} key={item.id} item={item} />)}
+              {items.map((item: any) => <ListItem key={item.id} item={item} />)}
           </div>
           <button className="hover:opacity-70 my-4 text-2xl border-2 py-1 px-3.5 rounded-full">+</button>
-          <form action="" onSubmit={() => addItem()} className="w-screen flex justify-center items-center">
-            <input type="text" name="input1" id="input1" className={inputStyling}/>
+
+          <form action="" id="form" onSubmit={handleSubmit} className="w-screen flex justify-center items-center">
+            <input type="text" name="textInput" id="textInput" className={inputStyling}/>
             <button type="submit"
               className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md mx-2"
             >Submit</button>

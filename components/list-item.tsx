@@ -11,35 +11,32 @@ export default function ListItem(props: any){
 
     const [edit, setEdit] = useState<boolean>(false)
     const [deleteVisible, setDeleteVisible] = useState<boolean>(true)
-    const [text, setText] = useState<string>(props.text)
 
-    useEffect(() => {}, [text, edit, deleteVisible])
-
-    const submitText = () => {
-        const input = (document.getElementById("text-input") as HTMLInputElement).value
-        setEdit(false)
-    }
+    // const submitText = () => {
+    //     const input = (document.getElementById("text-input") as HTMLInputElement).value
+    //     setEdit(false)
+    // }
 
     return(
         <div className={deleteVisible ? liElementEditStyle : liElementStyle}>
             <div className={liDotStyle}></div>
-            {
+            {/* {
                 edit ?
-                <form action="" onSubmit={submitText}>
+                <form action="" onSubmit={() => submitText}>
                     <input type="text" name="text-input" id="text-input" className={inputStyling} />
                 </form>
-                :
+                : */}
                 <div
                       className=" flex justify-center items-center">
                     <div
                         onClick={() => setEdit(true)} 
                         className={liStyle}>
-                        {text ? text : "New goal"}
+                        {props.item.text ? props.item.text : "New goal"}
                     </div>
                     {
                         deleteVisible ?
                         <div    
-                            onClick={props.deleteItem}
+                            onClick={() => props.deleteItem(props.item.id)}
                             className="cursor-pointer mt-1 p-1.5 bg-transparent border border-white rounded-full"
                         >
                             <Image 
@@ -48,7 +45,7 @@ export default function ListItem(props: any){
                                 height={8}
                                 alt="delete text icon"
                                 className=""
-                                onClick={props.deleteItem(props.item.id)}
+                                onClick={() => props.deleteItem(props.item.id)}
                             />
                         </div>  
                         :
@@ -63,7 +60,7 @@ export default function ListItem(props: any){
                         className="opacity-90"
                     /> */}
                 </div>
-            }
+
         </div>
     )
 }
