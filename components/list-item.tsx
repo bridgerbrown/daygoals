@@ -5,20 +5,19 @@ import Image from "next/image"
 export default function ListItem(props: any){
     const liStyle: string = `p-2 drop-shadow-lg tracking-wider text-center mr-3.5 min-w-[24]`
     const liDotStyle: string = `mr-4 w-2 h-2 border-white border-2 rounded-full`
-    const liElementStyle: string = `mb-12 flex justify-center items-center`
-    const liElementEditStyle: string = `ml-5.25 mb-12 flex justify-center items-center`
+    const liElementStyle: string = `mb-12 mr-2 flex justify-center items-center`
+    const liElementEditStyle: string = `ml-5.25 mr-2 mb-12 flex justify-center items-center`
     const inputStyling: string = `w-42 text-white p-2 bg-transparent border-2 rounded-md`
 
-    const [text, setText] = useState<string>("New")
     const [edit, setEdit] = useState<boolean>(false)
     const [deleteVisible, setDeleteVisible] = useState<boolean>(true)
+    const [text, setText] = useState<string>(props.text)
 
-    useEffect(() => {}, [edit, deleteVisible])
+    useEffect(() => {}, [text, edit, deleteVisible])
 
     const submitText = () => {
         const input = (document.getElementById("text-input") as HTMLInputElement).value
         setEdit(false)
-        setText(input)
     }
 
     return(
@@ -32,20 +31,24 @@ export default function ListItem(props: any){
                 :
                 <div
                       className=" flex justify-center items-center">
-                    <li
+                    <div
                         onClick={() => setEdit(true)} 
                         className={liStyle}>
                         {text ? text : "New goal"}
-                    </li>
+                    </div>
                     {
                         deleteVisible ?
-                        <div className="mt-1 p-1.5 bg-transparent border border-white rounded-full">
+                        <div    
+                            onClick={props.deleteItem}
+                            className="cursor-pointer mt-1 p-1.5 bg-transparent border border-white rounded-full"
+                        >
                             <Image 
                                 src="/x-icon.png"
                                 width={8}
                                 height={8}
                                 alt="delete text icon"
                                 className=""
+                                onClick={props.deleteItem(props.item.id)}
                             />
                         </div>  
                         :
