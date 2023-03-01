@@ -5,8 +5,8 @@ import Image from "next/image"
 export default function ListItem(props: any){
     const liStyle: string = `p-2 drop-shadow-lg tracking-wider text-center mr-3.5 min-w-[24]`
     const liDotStyle: string = `mr-4 w-2 h-2 border-white border-2 rounded-full`
-    const liElementStyle: string = `mb-12 mr-2 flex justify-center items-center`
-    const liElementEditStyle: string = `ml-5.25 mr-2 mb-12 flex justify-center items-center`
+    const liElementStyle: string = `mb-8 mr-2 flex justify-center items-center`
+    const liElementEditStyle: string = `ml-5.25 mr-2 mb-8 flex justify-center items-center`
     const inputStyling: string = `w-42 text-white p-2 bg-transparent border-2 rounded-md`
 
     const [edit, setEdit] = useState<boolean>(false)

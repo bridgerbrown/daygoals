@@ -18,12 +18,14 @@ export default function Home() {
   function handleSubmit(e: React.FormEvent<InputFormElement>){
     e.preventDefault()
     const text = (document.getElementById("textInput") as HTMLInputElement).value
-    setItems([...items, {id: items.length, text: text}])
+    setItems([...items, {id: items.length, text: text}]);
+    (document.getElementById("form") as HTMLFormElement).reset()
   }
 
-  // const deleteItem = (id: number) => {
-  //   setItems(items.map((item: any) => item.id !== id))
-  // }
+  const deleteItem = (id: number) => {
+    setItems(items.map((item: any) => item.id !== id))
+    console.log(items)
+  }
 
 
 
@@ -49,7 +51,7 @@ export default function Home() {
             <div className="w-20 rounded-full h-1 bg-white opacity-90"></div>
           </div>
           <div className="">
-              {items.map((item: any) => <ListItem key={item.id} item={item} />)}
+              {items.map((item: any) => <ListItem key={item.id} item={item} deleteItem={deleteItem} />)}
           </div>
           <button className="hover:opacity-70 my-4 text-2xl border-2 py-1 px-3.5 rounded-full">+</button>
 
