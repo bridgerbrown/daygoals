@@ -16,6 +16,8 @@ export default function Home() {
   const [items, setItems] = useState<any>([])
   const [addItemMode, setAddItemMode] = useState<boolean>(false)
   const [editMode, setEditMode] = useState<boolean>(false)
+  const [mainTitle, setMainTitle] = useState<string>("Goals")
+  const [titleEdit, setTitleEdit] = useState<boolean>(false)
 
   function handleSubmit(e: React.FormEvent<InputFormElement>){
     e.preventDefault()
@@ -34,9 +36,20 @@ export default function Home() {
     setItems(items.map((item: any) => item.id == id ? {id: item.id, text: text}: item));
   }
 
+  const submitTitle = (e: React.FormEvent<InputFormElement>) => {
+    e.preventDefault()
+    const input = (document.getElementById("title-input") as HTMLInputElement).value
+    setMainTitle(input)
+    setTitleEdit(false)
+}
+
   console.log(items)
 
-  useEffect(() => {}, [items])
+  useEffect(() => {
+    if(!editMode){
+      setTitleEdit(false)
+    }
+  }, [items, mainTitle, editMode])
 
 
 
@@ -44,8 +57,24 @@ export default function Home() {
     <>
       <main className="font-Gelica bg-orange-100 bg-gradient-to-t from-orange-500 w-screen h-screen">
         <div className="h-1/3">
-
         </div>
+          { titleEdit ?
+              <div className="w-screen flex justify-center mb-1">
+                <form action="" onSubmit={(e) => submitTitle(e)}>
+                  <input type="text" name="title-input" id="title-input" className="w-72 text-white p-2 bg-transparent border-2 rounded-md" />
+                </form>
+              </div>
+              :
+              <div className="text-white flex-col flex justify-center items-center w-screen">
+                <div className="drop-shadow-lg mb-1 flex flex-col justify-center items-center"
+                  onClick={() => setTitleEdit(true)} 
+                  >
+                    <h1 className="tracking-wider text-3xl">
+                    {mainTitle ? mainTitle : "Goals"}
+                    </h1>
+                </div>
+              </div> 
+          }
         
         {/* <div className="mb-12 text-white w-screen flex flex-col justify-center items-center text-center">
           <h1 className="mb-4 text-xl">Today</h1>
@@ -57,7 +86,7 @@ export default function Home() {
         <div className="text-white flex-col flex justify-center items-center w-screen">
           <div className="drop-shadow-lg mb-8 flex flex-col justify-center items-center">
             <h1 className="mb-1 tracking-wider text-3xl">
-              Goals
+              
             </h1>
             <div className="w-20 rounded-full h-1 bg-white opacity-90"></div>
           </div>

@@ -26,11 +26,15 @@ export default function ListItem(props: any){
         setEdit(false)
     }
 
+    useEffect(() => {
+        setEdit(false)
+    }, [props.editMode])
+
     return(
         <div className={props.editMode ? liElementEditStyle : liElementStyle}>
             <div className={liDotStyle}></div>
             {
-                edit ?
+                edit && props.editMode ?
                 <form action="" onSubmit={(e) => submitText(e)}>
                     <input type="text" name="text-input" id="text-input" className={inputStyling} />
                 </form>
