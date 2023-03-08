@@ -14,18 +14,23 @@ export default function Home() {
   const settingDotsStyle: string = `opacity-70 mr-1 w-1.5 h-1.5 rounded-full bg-white`
   const inputStyling: string = `w-72 text-white p-2 bg-transparent border-2 rounded-md`
   const [items, setItems] = useState<any>([])
+  const [addItemMode, setAddItemMode] = useState<boolean>(false)
+  const [editMode, setEditMode] = useState<boolean>(false)
 
   function handleSubmit(e: React.FormEvent<InputFormElement>){
     e.preventDefault()
     const text = (document.getElementById("textInput") as HTMLInputElement).value
     setItems([...items, {id: items.length, text: text}]);
+    setAddItemMode(false);
     (document.getElementById("form") as HTMLFormElement).reset()
   }
 
   const deleteItem = (id: number) => {
-    setItems(items.map((item: any) => item.id !== id))
+    setItems(items.filter((item: any) => item.id !== id))
     console.log(items)
   }
+
+  useEffect(() => {}, [items])
 
 
 
@@ -51,16 +56,34 @@ export default function Home() {
             <div className="w-20 rounded-full h-1 bg-white opacity-90"></div>
           </div>
           <div className="">
-              {items.map((item: any) => <ListItem key={item.id} item={item} deleteItem={deleteItem} />)}
+              {
+                items.length ?
+                items.map((item: any) => <ListItem key={item.id} item={item} deleteItem={deleteItem} editMode={editMode} />)
+                :
+                <div className="mb-6">
+                  <h2>No goals set yet!</h2>
+                </div>
+              }
           </div>
-          <button className="hover:opacity-70 my-4 text-2xl border-2 py-1 px-3.5 rounded-full">+</button>
-
-          <form action="" id="form" onSubmit={handleSubmit} className="w-screen flex justify-center items-center">
-            <input type="text" name="textInput" id="textInput" className={inputStyling}/>
-            <button type="submit"
-              className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md mx-2"
-            >Submit</button>
-          </form>
+          {
+            editMode ?
+              addItemMode ?
+                <form action="" id="form" onSubmit={handleSubmit} className="w-screen flex justify-center items-center">
+                <input type="text" name="textInput" id="textInput" className={inputStyling}/>
+                <button type="submit"
+                  className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md ml-2"
+                >Submit</button>
+                </form>
+              :
+                <button className="hover:opacity-70 mt-1 mb-4 text-2xl border-2 py-1 px-3.5 rounded-full"
+                  onClick={() => setAddItemMode(true)}
+                >
+                  +
+                </button>
+            :
+            <div></div>
+            
+          }
         </div>
 
         <div className="flex absolute bottom-6 left-4">
@@ -69,9 +92,21 @@ export default function Home() {
             <div className={settingDotsStyle}></div>
             <div className={settingDotsStyle}></div>
           </div>
-
           <div>
-            <button className="hover:opacity-70 text-white opacity-90">Edit</button>
+            {
+              editMode ?
+                <button className="hover:opacity-70 text-white opacity-90"
+                onClick={() => setEditMode(false)}
+                >
+                  Done
+                </button>
+              :
+                <button className="hover:opacity-70 text-white opacity-90"
+                onClick={() => setEditMode(true)}
+                >
+                  Edit
+                </button>
+            }
           </div>
         </div> 
       </main>

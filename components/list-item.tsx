@@ -18,7 +18,7 @@ export default function ListItem(props: any){
     // }
 
     return(
-        <div className={deleteVisible ? liElementEditStyle : liElementStyle}>
+        <div className={props.editMode ? liElementEditStyle : liElementStyle}>
             <div className={liDotStyle}></div>
             {/* {
                 edit ?
@@ -34,7 +34,7 @@ export default function ListItem(props: any){
                         {props.item.text ? props.item.text : "New goal"}
                     </div>
                     {
-                        deleteVisible ?
+                        props.editMode ?
                         <div    
                             onClick={() => props.deleteItem(props.item.id)}
                             className="cursor-pointer mt-1 p-1.5 bg-transparent border border-white rounded-full"
