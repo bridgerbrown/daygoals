@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 
+interface FormElements extends HTMLFormControlsCollection {
+    textInput: HTMLInputElement
+  }
+  
+  interface InputFormElement extends HTMLFormElement {
+    readonly elements: FormElements
+  }
 
 export default function ListItem(props: any){
     const liStyle: string = `p-2 drop-shadow-lg tracking-wider text-center mr-3.5 min-w-[24]`
     const liDotStyle: string = `mr-4 w-2 h-2 border-white border-2 rounded-full`
-    const liElementStyle: string = `mb-8 mr-2 flex justify-center items-center`
-    const liElementEditStyle: string = `ml-5.25 mr-2 mb-8 flex justify-center items-center`
+    const liElementStyle: string = `mb-6 mr-2 flex justify-center items-center`
+    const liElementEditStyle: string = `ml-5.25 mr-2 mb-6 flex justify-center items-center`
     const inputStyling: string = `w-42 text-white p-2 bg-transparent border-2 rounded-md`
 
     const [edit, setEdit] = useState<boolean>(false)
     const [deleteVisible, setDeleteVisible] = useState<boolean>(true)
 
-    // const submitText = () => {
-    //     const input = (document.getElementById("text-input") as HTMLInputElement).value
-    //     setEdit(false)
-    // }
+    const submitText = (e: React.FormEvent<InputFormElement>) => {
+        e.preventDefault()
+        const input = (document.getElementById("text-input") as HTMLInputElement).value
+        props.editItem(props.item.id, input)
+        setEdit(false)
+    }
 
     return(
         <div className={props.editMode ? liElementEditStyle : liElementStyle}>
             <div className={liDotStyle}></div>
-            {/* {
+            {
                 edit ?
-                <form action="" onSubmit={() => submitText}>
+                <form action="" onSubmit={(e) => submitText(e)}>
                     <input type="text" name="text-input" id="text-input" className={inputStyling} />
                 </form>
-                : */}
+                :
                 <div
                       className=" flex justify-center items-center">
                     <div
@@ -60,7 +69,7 @@ export default function ListItem(props: any){
                         className="opacity-90"
                     /> */}
                 </div>
-
+            }
         </div>
     )
 }

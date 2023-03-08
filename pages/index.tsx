@@ -30,6 +30,12 @@ export default function Home() {
     console.log(items)
   }
 
+  const editItem = (id: number, text: string) => {
+    setItems(items.map((item: any) => item.id == id ? {id: item.id, text: text}: item));
+  }
+
+  console.log(items)
+
   useEffect(() => {}, [items])
 
 
@@ -58,7 +64,7 @@ export default function Home() {
           <div className="">
               {
                 items.length ?
-                items.map((item: any) => <ListItem key={item.id} item={item} deleteItem={deleteItem} editMode={editMode} />)
+                items.map((item: any) => <ListItem key={item.id} item={item} deleteItem={deleteItem} editMode={editMode} editItem={editItem} />)
                 :
                 <div className="mb-6">
                   <h2>No goals set yet!</h2>
@@ -69,10 +75,10 @@ export default function Home() {
             editMode ?
               addItemMode ?
                 <form action="" id="form" onSubmit={handleSubmit} className="w-screen flex justify-center items-center">
-                <input type="text" name="textInput" id="textInput" className={inputStyling}/>
-                <button type="submit"
-                  className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md ml-2"
-                >Submit</button>
+                  <input type="text" name="textInput" id="textInput" className={inputStyling}/>
+                  <button type="submit"
+                    className="hover:opacity-70 bg-transparent border-2 p-2 rounded-md ml-2"
+                  >Submit</button>
                 </form>
               :
                 <button className="hover:opacity-70 mt-1 mb-4 text-2xl border-2 py-1 px-3.5 rounded-full"
