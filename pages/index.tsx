@@ -67,7 +67,7 @@ export default function Home() {
               :
               <div className="text-white flex-col flex justify-center items-center w-screen">
                 <div className="drop-shadow-lg mb-1 flex flex-col justify-center items-center"
-                  onClick={() => setTitleEdit(true)} 
+                  onClick={editMode ? () => setTitleEdit(true) : undefined} 
                   >
                     <h1 className="tracking-wider text-3xl">
                     {mainTitle ? mainTitle : "Goals"}
