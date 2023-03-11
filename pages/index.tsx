@@ -1,4 +1,5 @@
 import ListItem from "@/components/list-item"
+import Settings from "@/components/settings"
 import Head from "next/head"
 import { useEffect, useState, MouseEvent } from "react"
 
@@ -143,7 +144,8 @@ export default function Home() {
                 </button>
             }
           </div>
-        </div> 
+        </div>
+        <Settings />
       </main>
     </>
   )
