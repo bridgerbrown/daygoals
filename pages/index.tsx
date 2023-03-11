@@ -1,5 +1,5 @@
 import ListItem from "@/components/list-item"
-import Settings from "@/components/settings"
+import Settings from "@/components/settings/settings"
 import Head from "next/head"
 import { useEffect, useState, MouseEvent } from "react"
 
@@ -19,6 +19,7 @@ export default function Home() {
   const [editMode, setEditMode] = useState<boolean>(false)
   const [mainTitle, setMainTitle] = useState<string>("Goals")
   const [titleEdit, setTitleEdit] = useState<boolean>(false)
+  const [settingsMode, setSettingsMode] = useState<boolean>(false)
 
   function handleSubmit(e: React.FormEvent<InputFormElement>){
     e.preventDefault()
@@ -123,7 +124,9 @@ export default function Home() {
         </div>
 
         <div className="flex absolute bottom-6 left-4">
-          <div className="hover:cursor-pointer hover:opacity-70 mr-4 flex justify-center items-center">
+          <div className="hover:cursor-pointer hover:opacity-70 mr-4 flex justify-center items-center"
+            onClick={() => setSettingsMode(true)}
+          >
             <div className={settingDotsStyle}></div>
             <div className={settingDotsStyle}></div>
             <div className={settingDotsStyle}></div>
@@ -145,7 +148,12 @@ export default function Home() {
             }
           </div>
         </div>
-        <Settings />
+        {
+          settingsMode ?
+          <Settings setSettingsMode={setSettingsMode} />
+          :
+          <div></div>
+        }
       </main>
     </>
   )
