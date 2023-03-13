@@ -51,6 +51,9 @@ export default function Home() {
     if(!editMode){
       setTitleEdit(false)
     }
+    chrome.storage.sync.set({ key: value }).then(() => {
+      console.log(value)
+    })
   }, [items, mainTitle, editMode])
 
 

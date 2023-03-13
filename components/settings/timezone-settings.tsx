@@ -20,7 +20,7 @@ export default function TimezoneSettings(props: any){
                     Dynamic Background
                 </h2>
                 <form action="" className="mt-2">
-                    <input type="radio" name="dynamicBg" id="on" value="on" checked onClick={() => setDynamicBgSetting(true)}/>
+                    <input type="radio" name="dynamicBg" id="on" value="on" defaultChecked onClick={() => setDynamicBgSetting(true)}/>
                     <label htmlFor="on"
                         className="ml-2 mr-4 text-white"
                     >

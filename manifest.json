@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Day Goals",
+    "description": "A Chrome browser extension for new tabs to display your life reminders, over a dynamic sun/moon backdrop that changes according to your location.",
+    "version": "0.1.0",
+    "icons": {
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["script.js"],
+        "css": ["globals.css"]
+      }
+    ]
+  }
